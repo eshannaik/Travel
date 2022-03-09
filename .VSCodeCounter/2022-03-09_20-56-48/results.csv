@@ -1,0 +1,39 @@
+"filename", "language", "JSON", "JavaScript", "XML", "Markdown", "CSS", "HTML", "comment", "blank", "total"
+"e:\Education\travel log\backend\package-lock.json", "JSON", 3119, 0, 0, 0, 0, 0, 0, 1, 3120
+"e:\Education\travel log\backend\package.json", "JSON", 19, 0, 0, 0, 0, 0, 0, 2, 21
+"e:\Education\travel log\backend\server.js", "JavaScript", 0, 45, 0, 0, 0, 0, 17, 8, 70
+"e:\Education\travel log\backend\tables.js", "JavaScript", 0, 7, 0, 0, 0, 0, 0, 2, 9
+"e:\Education\travel log\package-lock.json", "JSON", 984, 0, 0, 0, 0, 0, 0, 1, 985
+"e:\Education\travel log\package.json", "JSON", 9, 0, 0, 0, 0, 0, 0, 1, 10
+"e:\Education\travel log\travel\.VSCodeCounter\2022-03-06_17-32-10\details.md", "Markdown", 0, 0, 0, 30, 0, 0, 0, 6, 36
+"e:\Education\travel log\travel\.VSCodeCounter\2022-03-06_17-32-10\diff-details.md", "Markdown", 0, 0, 0, 9, 0, 0, 0, 6, 15
+"e:\Education\travel log\travel\.VSCodeCounter\2022-03-06_17-32-10\diff.md", "Markdown", 0, 0, 0, 12, 0, 0, 0, 7, 19
+"e:\Education\travel log\travel\.VSCodeCounter\2022-03-06_17-32-10\results.json", "JSON", 1, 0, 0, 0, 0, 0, 0, 0, 1
+"e:\Education\travel log\travel\.VSCodeCounter\2022-03-06_17-32-10\results.md", "Markdown", 0, 0, 0, 17, 0, 0, 0, 7, 24
+"e:\Education\travel log\travel\README.md", "Markdown", 0, 0, 0, 38, 0, 0, 0, 33, 71
+"e:\Education\travel log\travel\package-lock.json", "JSON", 28268, 0, 0, 0, 0, 0, 0, 1, 28269
+"e:\Education\travel log\travel\package.json", "JSON", 44, 0, 0, 0, 0, 0, 0, 1, 45
+"e:\Education\travel log\travel\public\index.html", "HTML", 0, 0, 0, 0, 0, 20, 23, 1, 44
+"e:\Education\travel log\travel\public\manifest.json", "JSON", 25, 0, 0, 0, 0, 0, 0, 1, 26
+"e:\Education\travel log\travel\src\App.css", "CSS", 0, 0, 0, 0, 8, 0, 0, 1, 9
+"e:\Education\travel log\travel\src\App.js", "JavaScript", 0, 81, 0, 0, 0, 0, 0, 11, 92
+"e:\Education\travel log\travel\src\App.test.js", "JavaScript", 0, 7, 0, 0, 0, 0, 0, 2, 9
+"e:\Education\travel log\travel\src\component\Header.css", "CSS", 0, 0, 0, 0, 19, 0, 0, 3, 22
+"e:\Education\travel log\travel\src\component\Header.js", "JavaScript", 0, 24, 0, 0, 0, 0, 0, 3, 27
+"e:\Education\travel log\travel\src\component\Home.css", "CSS", 0, 0, 0, 0, 56, 0, 4, 5, 65
+"e:\Education\travel log\travel\src\component\Home.js", "JavaScript", 0, 57, 0, 0, 0, 0, 0, 5, 62
+"e:\Education\travel log\travel\src\component\SignIn.js", "JavaScript", 0, 116, 0, 0, 0, 0, 0, 6, 122
+"e:\Education\travel log\travel\src\component\SignUp.js", "JavaScript", 0, 97, 0, 0, 0, 0, 3, 7, 107
+"e:\Education\travel log\travel\src\component\View.js", "JavaScript", 0, 67, 0, 0, 0, 0, 30, 11, 108
+"e:\Education\travel log\travel\src\component\about me.css", "CSS", 0, 0, 0, 0, 18, 0, 0, 2, 20
+"e:\Education\travel log\travel\src\component\about me.js", "JavaScript", 0, 30, 0, 0, 0, 0, 0, 3, 33
+"e:\Education\travel log\travel\src\component\add.js", "JavaScript", 0, 121, 0, 0, 0, 0, 33, 16, 170
+"e:\Education\travel log\travel\src\component\remove.js", "JavaScript", 0, 84, 0, 0, 0, 0, 1, 10, 95
+"e:\Education\travel log\travel\src\component\sidebar.css", "CSS", 0, 0, 0, 0, 3, 0, 0, 0, 3
+"e:\Education\travel log\travel\src\component\sidebar.js", "JavaScript", 0, 51, 0, 0, 0, 0, 7, 4, 62
+"e:\Education\travel log\travel\src\index.css", "CSS", 0, 0, 0, 0, 12, 0, 0, 2, 14
+"e:\Education\travel log\travel\src\index.js", "JavaScript", 0, 11, 0, 0, 0, 0, 3, 4, 18
+"e:\Education\travel log\travel\src\logo.svg", "XML", 0, 0, 1, 0, 0, 0, 0, 0, 1
+"e:\Education\travel log\travel\src\reportWebVitals.js", "JavaScript", 0, 12, 0, 0, 0, 0, 0, 2, 14
+"e:\Education\travel log\travel\src\setupTests.js", "JavaScript", 0, 1, 0, 0, 0, 0, 4, 1, 6
+"Total", "-", 32469, 811, 1, 106, 116, 20, 125, 176, 33824

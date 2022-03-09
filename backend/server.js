@@ -13,8 +13,15 @@ app.use(Cors());
 
 // const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/node-demo')
-
+mongoose.connect('mongodb://localhost:27017/travel', {
+    useNewUrlParser: true
+}).then(() => {
+    console.log('Database connected sucessfully !')
+},
+    error => {
+        console.log('Database could not be connected : ' + error)
+    }
+)
 // const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}))
@@ -25,15 +32,17 @@ app.use(bodyParser.urlencoded({extended:true}))
 //     // res.send('Hi')
 // })
 
-app.post('/main/add',(req,res) => {
+app.post('/main/add',async (req,res) => {
     const myData = new Log(req.body);
-    myData.save()
-        .then(item => {
+    let result = await myData.save()
+    result = result.toObject();
+    if(result){
+            console.log(result)
             res.send("item saved to database");
-        })
-        .catch(err => {
-            res.status(400).send("unable to save to database");
-        });
+        }
+    else{
+            res.status(400).send(err);
+        }
 })
 
 // app.delete('/main/remove/:date',(req,res) => {

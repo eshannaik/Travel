@@ -1,0 +1,20 @@
+.welcome {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+}
+
+.box{
+    background-color: white;
+    margin: 50px;
+}
+
+.header_icon1{
+    margin-left:1300px;
+    margin-top:20px;
+    color: grey;
+}

@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom'
 import './Home.css'
-import Particles from 'react-tsparticles';
+// import Particles from 'react-tsparticles';
 import { Button } from '@material-ui/core';
 
 const Home = () =>{
@@ -12,49 +12,12 @@ const Home = () =>{
                 </div>
                 <br></br>
 
-                <p><Button type="submit" fullWidth variant="contained" color="primary">
-                    <Link to="/main/signin">
+                <p><Link to="/main/signin">
+                    <Button type="submit" fullWidth variant="contained" color="primary">
                         Click to get started
-                    </Link>
-                </Button></p>
+                    </Button>
+                </Link></p>
             </div>
-
-            <Particles id="particles-js"
-                params={{
-                particles: {
-                    number: {
-                    value: 400,
-                    density: {
-                        enable: true,
-                        value_area: 1000
-                    }
-                },
-                color: {
-                    value: '#fff'
-                },
-                opacity: {
-                    value: 0.3,
-                    anim: {
-                        enable: true
-                    }
-                },
-                size: {
-                    value: 2,
-                    random: true,
-                    anim: {
-                        enable: true,
-                        speed: 2
-                    }
-                },
-                line_linked: {
-                    enable: false
-                },
-                move: {
-                    speed: 0.2
-                },
-
-                }}}
-            />
         </div>
     )
 }

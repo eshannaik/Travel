@@ -15,9 +15,9 @@ app.use(Cors());
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/travel', {
     useNewUrlParser: true
-}).then(() => {
+    }).then(() => {
     console.log('Database connected sucessfully !')
-},
+    },
     error => {
         console.log('Database could not be connected : ' + error)
     }
@@ -37,7 +37,7 @@ app.post('/main/add',async (req,res) => {
     let result = await myData.save()
     result = result.toObject();
     if(result){
-            console.log(result)
+            // console.log(result)
             res.send("item saved to database");
         }
     else{
@@ -45,8 +45,22 @@ app.post('/main/add',async (req,res) => {
         }
 })
 
-// app.delete('/main/remove/:date',(req,res) => {
-//     Log.find({_date : req.params.id})
+app.delete('/main/remove/:Title',async (req,res) => {
+    const t = req.body.Title
+    // console.log(t);
+    Log.deleteOne({Title: t})
+        .then(item => {
+            res.send("item removed from database");
+        })
+        .catch(err => {
+            res.status(400).send("unable to remove item from database");
+        });
+})
+
+// app.delete('/main/update/:Title',async (req,res) => {
+//     const t = req.body.Title
+//     // console.log(t);
+//     Log.updateOne({Title: t})
 //         .then(item => {
 //             res.send("item removed from database");
 //         })
@@ -55,14 +69,15 @@ app.post('/main/add',async (req,res) => {
 //         });
 // })
 
-app.get('/main/view',(req,res) => {
-    Log.find().sort({date:-1})
-        .then(item => {
-            res.json(item);
-        })
-        .catch(err => {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
-            res.status(400).send("unable to remove item from database");
-        });
+app.get('/main/view',async (req,res) => {
+    Log.find({})
+    .exec(function(err,l){
+        if(err){
+            console.log("Error retrieving logs")
+        }else{
+            res.json(l);
+        }
+    });
 })
 
 app.listen(port,() => {

@@ -3,12 +3,13 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
+// import Link from '@material-ui/core/Link';
 import MinusIcon from '@material-ui/icons/Remove';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
+// import Grid from '@material-ui/core/Grid';
+import { useState } from 'react';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -33,6 +34,29 @@ const useStyles = makeStyles((theme) => ({
 export default function RemoveLog() {
   const classes = useStyles();
 
+  const [Title,setTitle] = useState("");
+
+  const onHandleSubmit = async (e) => {
+    e.preventDefault();
+
+    let result = await fetch(
+      'http://localhost:8001/main/remove/:Title',{
+        method: "delete",
+        body: JSON.stringify({Title}),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+
+    result = await result.json();
+    console.log(result);
+    if(result){
+      console.log("Data is removed");
+      setTitle("");
+    }
+  }
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -48,7 +72,7 @@ export default function RemoveLog() {
         </Typography>
 
         <form className={classes.form} noValidate>
-        <Grid container>
+        {/* <Grid container>
             <Grid item xs>
                 <TextField
                 variant="outlined"
@@ -76,7 +100,20 @@ export default function RemoveLog() {
                 />
               </Link>
             </Grid>
-        </Grid>
+        </Grid> */}
+
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="Title"
+              label="Title"
+              name="Title"
+              autoFocus
+              value={Title}
+              onChange = {(e) => setTitle(e.target.value)}
+            />
 
           <Button
             type="submit"
@@ -84,6 +121,7 @@ export default function RemoveLog() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={onHandleSubmit}
           >
             Remove from Log
           </Button>

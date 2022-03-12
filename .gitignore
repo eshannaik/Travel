@@ -5,6 +5,9 @@
 /travel/node_modules
 /travel/.pnp
 /travel/.pnp.js
+/node_modules
+/package-lock.json
+/package.json
 
 # testing
 /travel/coverage

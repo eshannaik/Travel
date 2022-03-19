@@ -1,10 +1,10 @@
 # Details
 
-Date : 2022-03-19 14:21:26
+Date : 2022-03-19 15:42:08
 
 Directory e:\Education\travel log
 
-Total : 32 files,  33277 codes, 195 comments, 150 blanks, all 33622 lines
+Total : 28 files,  1154 codes, 195 comments, 146 blanks, all 1495 lines
 
 [summary](results.md) / details / [diff summary](diff.md) / [diff details](diff-details.md)
 
@@ -12,12 +12,8 @@ Total : 32 files,  33277 codes, 195 comments, 150 blanks, all 33622 lines
 | filename | language | code | comment | blank | total |
 | :--- | :--- | ---: | ---: | ---: | ---: |
 | [backend/login.js](/backend/login.js) | JavaScript | 6 | 0 | 2 | 8 |
-| [backend/package-lock.json](/backend/package-lock.json) | JSON | 3,681 | 0 | 1 | 3,682 |
-| [backend/package.json](/backend/package.json) | JSON | 23 | 0 | 1 | 24 |
 | [backend/server.js](/backend/server.js) | JavaScript | 111 | 33 | 17 | 161 |
 | [backend/tables.js](/backend/tables.js) | JavaScript | 7 | 0 | 2 | 9 |
-| [travel/package-lock.json](/travel/package-lock.json) | JSON | 28,370 | 0 | 1 | 28,371 |
-| [travel/package.json](/travel/package.json) | JSON | 49 | 0 | 1 | 50 |
 | [travel/public/index.html](/travel/public/index.html) | HTML | 20 | 23 | 1 | 44 |
 | [travel/public/manifest.json](/travel/public/manifest.json) | JSON | 25 | 0 | 1 | 26 |
 | [travel/src/App.css](/travel/src/App.css) | CSS | 15 | 0 | 2 | 17 |

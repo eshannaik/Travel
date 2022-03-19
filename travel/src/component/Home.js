@@ -1,21 +1,18 @@
-import {Link} from 'react-router-dom'
+import Link from '@material-ui/core/Link';
 import './Home.css'
 // import Particles from 'react-tsparticles';
-import { Button } from '@material-ui/core';
 
 const Home = () =>{
     return(
         <div>
             <div className="scale-in-center" id="welcome">
-                <div>
-                    <h1 className="head">Travel Log</h1>
+                <div style={{color:"white"}}>
+                    <h1>Travel Log</h1>
                 </div>
                 <br></br>
 
-                <p><Link to="/main/signin">
-                    <Button type="submit" fullWidth variant="contained" color="primary">
-                        Click to get started
-                    </Button>
+                <p><Link variant="h4" color="secondary" href = "http://localhost:3000/main/signin">
+                        {'Click to get started'}
                 </Link></p>
             </div>
         </div>

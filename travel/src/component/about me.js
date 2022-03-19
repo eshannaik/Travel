@@ -8,7 +8,7 @@ const AboutMe = () =>{
         <div>
             <div id="welcome">
                 <div>
-                    <div style={{backgroundColor: "white", margin: "50px"}}>
+                    <div style={{backgroundColor:"grey" ,color:"white" ,margin: "50px"}}>
                         <h1><center>About Me</center></h1>
                         <br></br>
                         <br></br>

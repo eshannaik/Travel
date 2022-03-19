@@ -3,7 +3,8 @@ import {Navigation} from 'react-minimal-side-navigation'
 import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css'
 import { useNavigate, useLocation } from "react-router-dom";
 // import './sidebar.css';
-// import Icon from "awesome-react-icons";
+// import { IconName } from "react-icons/fa";
+import 'font-awesome/css/font-awesome.min.css';
 
 const Sidebar = () => {
     const navigate = useNavigate();
@@ -23,18 +24,23 @@ const Sidebar = () => {
                         {
                             title: 'Add a log',
                             itemId: '/main/add',
-                            // elemBefore: () => <Icon name="plus-square" />
+                            elemBefore: () => <i className='fa fa-plus fa-solid' />
                         },
                         {
                             title: 'Remove a log',
                             itemId: '/main/remove',
-                            // elemBefore: () => <Icon name="minus-square"/>
+                            elemBefore: () => <i className='fa fa-minus fa-solid' />
                         },
                         {
                             title: 'View a log',
                             itemId: '/main/view',
-                            // elemBefore: () => <Icon name="eye"/>
+                            elemBefore: () => <i className='fa fa-eye fa-solid' />
                         },
+                        // {
+                        //     title: 'Update a log',
+                        //     itemId: '/main/update',
+                        //     // elemBefore: () => <Icon name="eye"/>
+                        // },
                     ]}
                 />
 
@@ -46,7 +52,7 @@ const Sidebar = () => {
                             {
                                 title: 'Home',
                                 itemId: "/",
-                                // elemBefore: () => <Icon name="home"/>
+                                elemBefore: () => <i className='fa fa-home fa-solid' />
                             }
                         ]}
                         onSelect={({itemId}) =>{

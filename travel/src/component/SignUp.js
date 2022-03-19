@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import  {useState} from 'react';
 
 function Copyright() {
   return (
@@ -49,6 +50,34 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp() {
   const classes = useStyles();
 
+  const [Username,setEmail] = useState('');
+  const [Password,setPassword] = useState('');
+
+  const validateForm = async () => {
+    return Username.length > 0 && Password.length > 0;
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    let result = await fetch (
+      'http://localhost:8001/main/signup',{
+        method: "post",
+        body: JSON.stringify({Username,Password}),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+
+    result = await result.json();
+    if(result){
+      alert(result.msg)
+      setEmail("");
+      setPassword("");;
+    }
+  }
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -59,7 +88,7 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Sign Up
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -70,6 +99,9 @@ export default function SignUp() {
             name="email"
             autoComplete="email"
             autoFocus
+            value={Username}
+            onChange = {(e) => setEmail(e.target.value)}
+            type="username" 
           />
 
           <TextField
@@ -79,9 +111,11 @@ export default function SignUp() {
             fullWidth
             name="password"
             label="Password"
-            type="password"
             id="password"
             autoComplete="current-password"
+            value={Password}
+            onChange = {(e) => setPassword(e.target.value)}
+            type="password"
           />
 
           <Button
@@ -90,12 +124,18 @@ export default function SignUp() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            disabled = {!validateForm}
+            onClick={handleSubmit}
           >
             Sign In
           </Button>
 
             <Link href="/main/add" variant="body2">
                 F
+            </Link>
+            <br></br>
+            <Link href="/main/signin" variant="body2">
+                G
             </Link>
         </form>
       </div>

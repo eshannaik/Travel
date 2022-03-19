@@ -11,6 +11,7 @@ import Container from '@material-ui/core/Container';
 // import Grid from '@material-ui/core/Grid';
 // import { Component } from 'react';
 import { useState } from 'react';
+// import 'react-notifications/lib/notifications.css';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -51,11 +52,11 @@ export default function AddLog(){
         }
       }
     )
+    // alert("Log has been added");
     // console.log(result);
     result = await result.json();
-    console.log(result);
     if(result){
-      console.log("Data is added");
+      alert(result.msg)
       setTitle("");
       setDescription("");
       setDate("");
@@ -76,7 +77,7 @@ export default function AddLog(){
           Add a Log
         </Typography>
 
-        <form className={classes.form} noValidate>
+        <form className={classes.form}>
 
         {/* <Grid container>
             <Grid item xs>

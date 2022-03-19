@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -49,6 +49,34 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
   const classes = useStyles();
 
+  const [Username,setEmail] = useState('');
+  const [Password,setPassword] = useState('');
+
+  const validateForm = async () => {
+    return Username.length > 0 && Password.length > 0;
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    let r = await fetch (
+      'http://localhost:8001/main/signin',{
+      method: 'post',
+      body: JSON.stringify({Username,Password}),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      }
+    })
+
+    r = await r.json();
+    if(r){
+      alert(r.msg)
+      setEmail("");
+      setPassword("");
+    }
+  }
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -59,7 +87,7 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -70,6 +98,9 @@ export default function SignIn() {
             name="email"
             autoComplete="email"
             autoFocus
+            value = {Username}
+            onChange = {(e) => setEmail(e.target.value)}
+            type = "email"
           />
           <TextField
             variant="outlined"
@@ -81,17 +112,21 @@ export default function SignIn() {
             type="password"
             id="password"
             autoComplete="current-password"
+            value = {Password}
+            onChange = {(e) => setPassword(e.target.value)}
           />
-          <FormControlLabel
+          {/* <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
-          />
+          /> */}
           <Button
             type="submit"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
+            disabled = {!validateForm}
+            onClick={handleSubmit}
           >
             Sign In
           </Button>

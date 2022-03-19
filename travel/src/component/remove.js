@@ -50,8 +50,8 @@ export default function RemoveLog() {
     )
 
     result = await result.json();
-    console.log(result);
     if(result){
+      alert(result.msg)
       console.log("Data is removed");
       setTitle("");
     }

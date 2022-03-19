@@ -9,6 +9,7 @@ import SignUp from './component/SignUp';
 import View from './component/View';
 import AboutMe from './component/about me';
 import Home from './component/Home';
+// import UpdateLog from './component/update';
 
 function App() {
   return (
@@ -26,7 +27,7 @@ function App() {
             <Routes>
               <Route path="/main/signin" element={
                 <div>
-                  <Header />
+                  {/* <Header /> */}
                   <SignIn />
                 </div>
               }
@@ -34,7 +35,7 @@ function App() {
 
               <Route path="/main/signup" element={
                 <div>
-                  <Header />
+                  {/* <Header /> */}
                   <SignUp />
                 </div>
               }
@@ -73,6 +74,17 @@ function App() {
                 </div>
               } 
               />
+
+              {/* <Route path="/main/update" element={
+                <div>
+                  <Header />
+                  <div className='flexbox-container'>
+                    <Sidebar/>
+                    <UpdateLog />
+                  </div>
+                </div>
+              } 
+              /> */}
 
               <Route path="/aboutme" element={
                 <div>

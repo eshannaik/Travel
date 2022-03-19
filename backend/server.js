@@ -3,6 +3,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import Cors from 'cors';
+import SL from './login.js';
 
 // const express = require('express')
 const app = express()
@@ -34,30 +35,38 @@ app.use(bodyParser.urlencoded({extended:true}))
 
 app.post('/main/add',async (req,res) => {
     const myData = new Log(req.body);
+    if(!req.body.Title){
+        return res.status(400).json({msg : "Please fill Title field"});
+    }
     let result = await myData.save()
     result = result.toObject();
     if(result){
-            // console.log(result)
-            res.send("item saved to database");
-        }
+        // console.log(result)
+        res.json({msg :"item saved to database"});
+    }
     else{
-            res.status(400).send(err);
-        }
+        res.status(400).json({msg : err});
+    }
 })
 
 app.delete('/main/remove/:Title',async (req,res) => {
     const t = req.body.Title
     // console.log(t);
-    Log.deleteOne({Title: t})
-        .then(item => {
-            res.send("item removed from database");
-        })
-        .catch(err => {
-            res.status(400).send("unable to remove item from database");
-        });
+    Log.findOne({Title:t})
+    .then( item => {
+        if(item){
+            Log.deleteOne({Title: t})
+            .then(item => {
+                res.json({msg :"Item remove from the database"});
+            })
+        }
+        else{
+            res.status(400).json({msg :"No log with that title exists"});
+        }
+    });
 })
 
-// app.delete('/main/update/:Title',async (req,res) => {
+// app.put('/main/update/:Title',async (req,res) => {
 //     const t = req.body.Title
 //     // console.log(t);
 //     Log.updateOne({Title: t})
@@ -78,6 +87,73 @@ app.get('/main/view',async (req,res) => {
             res.json(l);
         }
     });
+})
+
+// app.get('/main/view/user',async (req,res) => {
+//     Log.find({})
+//     .exec(function(err,l){
+//         if(err){
+//             console.log("Error retrieving logs")
+//         }else{
+//             res.json(l);
+//         }
+//     });
+// })
+
+app.post('/main/signin',async(req,res) => {
+    const uname = req.body.Username;
+    const pword = req.body.Password;
+
+    if(!uname || !pword){
+        return res.status(400).json({msg: ' Please enter all fields'})
+    }
+
+    SL.findOne({Username : uname})
+        .then( user => {
+            if(!user){
+                return res.status(400).json({msg:'User does not exists'})
+            }
+            else{
+                if(pword == user.Password)
+                    return res.status(400).json({msg:'Logged in'})
+                else
+                    return res.status(400).json({ msg: 'Invalid credentials', user:user});
+            }
+        })
+})
+
+app.post('/main/signup',async(req,res) => {
+    // console.log(req.body)
+    const myData = new SL(req.body);
+    const uname = req.body.Username;
+    const pword = req.body.Password;
+
+    if(!uname || !pword){
+        return res.status(400).json({msg: ' Please enter all fields'})
+    }
+
+    SL.findOne({Username : uname})
+        .then(user => {
+            if(user){
+                res.status(400).json({msg:'User already exists'})
+            }
+            else{
+                if(pword.length > 8){
+                    let result = myData.save();
+
+                    if(result){
+                        // console.log(result)
+                        res.status(400).json({msg:'User added'});
+                    }
+                    else{
+                        res.status(400).json({msg : err});
+                    }
+                }
+                else{
+                    res.status(400).json({msg:"Password must be atleast 8 characters long"})
+                }
+            }
+        })
 })
 
 app.listen(port,() => {

@@ -9,9 +9,13 @@ import SignUp from './component/SignUp';
 import View from './component/View';
 import AboutMe from './component/about me';
 import Home from './component/Home';
+import ForgotPassword from './component/forgot';
 // import UpdateLog from './component/update';
+import {useState} from 'react';
 
 function App() {
+  const [user,setLoginUser] = useState()
+  console.log(user === true)
   return (
     <div>
         <BrowserRouter>
@@ -28,7 +32,7 @@ function App() {
               <Route path="/main/signin" element={
                 <div>
                   {/* <Header /> */}
-                  <SignIn />
+                  <SignIn setLoginUser={setLoginUser}/>
                 </div>
               }
               />
@@ -42,13 +46,18 @@ function App() {
               />
               
               <Route path="/main/add" element={
-                <div>
-                  <Header />
-                  <div className='flexbox-container'>
-                    <Sidebar/>
-                    <AddLog />
-                  </div>
-                </div>
+                  user === true ?
+                    <div>
+                      <Header />
+                      <div className='flexbox-container'>
+                        <Sidebar/>
+                        <AddLog />
+                      </div>
+                    </div>
+                    :
+                    <div>
+                      <SignIn setLoginUser={setLoginUser} />
+                    </div>
               } 
               />
 
@@ -92,6 +101,14 @@ function App() {
                   <AboutMe />
                 </div>
               }
+              />
+
+                <Route path="/main/forgot" element={
+                  <div>
+                    {/* <Header /> */}
+                    <ForgotPassword />
+                  </div>
+                }
               />
 
             </Routes>

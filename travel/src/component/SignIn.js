@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 function Copyright() {
   return (
@@ -46,9 +47,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
+export default function SignIn({setLoginUser}) {
   const classes = useStyles();
 
+  // const {user,setUser] = userState({
+  //   Username:"",
+  //   Password:"",
+  // })
+  let navigate = useNavigate();
   const [Username,setEmail] = useState('');
   const [Password,setPassword] = useState('');
 
@@ -72,9 +78,13 @@ export default function SignIn() {
     r = await r.json();
     if(r){
       alert(r.msg)
+      setLoginUser(r.res)
       setEmail("");
       setPassword("");
     }
+
+    let path = "/main/add"
+    navigate(path)
   }
 
   return (
@@ -131,13 +141,9 @@ export default function SignIn() {
             Sign In
           </Button>
 
-            <Link href="/main/add" variant="body2">
-                F
-            </Link>
-
-            <Grid container>
+          <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <Link href="/main/forgot" variant="body2">
                 Forgot password?
               </Link>
             </Grid>

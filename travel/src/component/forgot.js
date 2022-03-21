@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import  {useState} from 'react';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 function Copyright() {
   return (
@@ -48,24 +48,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignUp() {
+export default function ForgotPassword() {
   const classes = useStyles();
 
-  const navigate = useNavigate();
+  let navigate = useNavigate();
   const [Username,setEmail] = useState('');
-  const [Password,setPassword] = useState('');
 
   const validateForm = async () => {
-    return Username.length > 0 && Password.length > 0;
+    return Username.length > 0;
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     let result = await fetch (
-      'http://localhost:8001/main/signup',{
+      'http://localhost:8001/main/forgot',{
         method: "post",
-        body: JSON.stringify({Username,Password}),
+        body: JSON.stringify({Username}),
         headers: {
           'Content-Type': 'application/json'
         }
@@ -76,7 +75,6 @@ export default function SignUp() {
     if(result){
       alert(result.msg)
       setEmail("");
-      setPassword("");;
     }
 
     let path = "/main/signin"
@@ -91,7 +89,7 @@ export default function SignUp() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign Up
+          Get Password
         </Typography>
         <form className={classes.form}>
           <TextField
@@ -109,20 +107,6 @@ export default function SignUp() {
             type="username" 
           />
 
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            id="password"
-            autoComplete="current-password"
-            value={Password}
-            onChange = {(e) => setPassword(e.target.value)}
-            type="password"
-          />
-
           <Button
             type="submit"
             fullWidth
@@ -132,9 +116,9 @@ export default function SignUp() {
             disabled = {!validateForm}
             onClick={handleSubmit}
           >
-            Sign In
+            Get Password
           </Button>
-          
+
         </form>
       </div>
       <Box mt={8}>

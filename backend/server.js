@@ -105,19 +105,19 @@ app.post('/main/signin',async(req,res) => {
     const pword = req.body.Password;
 
     if(!uname || !pword){
-        return res.status(400).json({msg: ' Please enter all fields'})
+        return res.status(400).json({msg: ' Please enter all fields',res:false})
     }
 
     SL.findOne({Username : uname})
         .then( user => {
             if(!user){
-                return res.status(400).json({msg:'User does not exists'})
+                return res.status(400).json({msg:'User does not exists',res:false})
             }
             else{
                 if(pword == user.Password)
-                    return res.status(400).json({msg:'Logged in'})
+                    return res.status(400).json({msg:'Logged in',res:true})
                 else
-                    return res.status(400).json({ msg: 'Invalid credentials', user:user});
+                    return res.status(400).json({ msg: 'Invalid credentials',res:false});
             }
         })
 })
@@ -152,6 +152,25 @@ app.post('/main/signup',async(req,res) => {
                 else{
                     res.status(400).json({msg:"Password must be atleast 8 characters long"})
                 }
+            }
+        })
+})
+
+app.post('/main/forgot',async(req,res) => {
+    const uname = req.body.Username;
+
+    if(!uname){
+        return res.status(400).json({msg: ' Please enter your username'})
+    }
+
+    SL.findOne({Username : uname})
+        .then(user => {
+            if(user){
+                const pword = user.Password
+                res.json({msg :"Your password is : " + pword})
+            }
+            else{
+                res.status(400).json({msg:"Password must be atleast 8 characters long"})
             }
         })
 })

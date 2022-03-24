@@ -15,7 +15,9 @@ import {useState} from 'react';
 
 function App() {
   const [user,setLoginUser] = useState()
-  console.log(user === true)
+  const [uname,setUserName] = useState()
+  // console.log(uname)
+  // console.log(user === true)
   return (
     <div>
         <BrowserRouter>
@@ -32,7 +34,7 @@ function App() {
               <Route path="/main/signin" element={
                 <div>
                   {/* <Header /> */}
-                  <SignIn setLoginUser={setLoginUser}/>
+                  <SignIn setUserName={setUserName} setLoginUser={setLoginUser}  />
                 </div>
               }
               />
@@ -44,14 +46,22 @@ function App() {
                 </div>
               }
               />
+
+              <Route path="/main/forgot" element={
+                  <div>
+                    {/* <Header /> */}
+                    <ForgotPassword />
+                  </div>
+                }
+              />
               
               <Route path="/main/add" element={
                   user === true ?
                     <div>
                       <Header />
                       <div className='flexbox-container'>
-                        <Sidebar/>
-                        <AddLog />
+                        <Sidebar />
+                        <AddLog name = {uname} />
                       </div>
                     </div>
                     :
@@ -65,9 +75,8 @@ function App() {
                 <div>
                   <Header />
                   <div className='flexbox-container'>
-                    
                     <Sidebar/>
-                    <RemoveLog />
+                    <RemoveLog name = {uname}/>
                   </div>
                 </div>
               } 
@@ -78,22 +87,11 @@ function App() {
                   <Header />
                   <div className='flexbox-container'>
                     <Sidebar/>
-                    <View />
+                    <View name = {uname}/>
                   </div>
                 </div>
               } 
               />
-
-              {/* <Route path="/main/update" element={
-                <div>
-                  <Header />
-                  <div className='flexbox-container'>
-                    <Sidebar/>
-                    <UpdateLog />
-                  </div>
-                </div>
-              } 
-              /> */}
 
               <Route path="/aboutme" element={
                 <div>
@@ -101,14 +99,6 @@ function App() {
                   <AboutMe />
                 </div>
               }
-              />
-
-                <Route path="/main/forgot" element={
-                  <div>
-                    {/* <Header /> */}
-                    <ForgotPassword />
-                  </div>
-                }
               />
 
             </Routes>

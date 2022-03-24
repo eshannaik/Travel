@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RemoveLog() {
+export default function RemoveLog(props) {
   const classes = useStyles();
 
   const [Title,setTitle] = useState("");
@@ -39,10 +39,11 @@ export default function RemoveLog() {
   const onHandleSubmit = async (e) => {
     e.preventDefault();
 
+    let Username = props.name
     let result = await fetch(
-      'http://localhost:8001/main/remove/:Title',{
+      'http://localhost:8001/main/remove/:Username/:Title',{
         method: "delete",
-        body: JSON.stringify({Title}),
+        body: JSON.stringify({Username,Title}),
         headers: {
           'Content-Type': 'application/json'
         }
@@ -52,7 +53,7 @@ export default function RemoveLog() {
     result = await result.json();
     if(result){
       alert(result.msg)
-      console.log("Data is removed");
+      console.log(result.msg);
       setTitle("");
     }
   }

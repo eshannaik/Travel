@@ -18,8 +18,8 @@ import CardContent from '@material-ui/core/CardContent';
 import './View.css'
 
 class View extends Component{
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
         logs:[],
         _id:'',
@@ -27,8 +27,17 @@ class View extends Component{
         Description: '',
         Date_added: ''
     };
-
-    fetch('http://localhost:8001/main/view')
+    let Username = props.name
+    console.log(JSON.stringify({Username}))
+    fetch(
+      'http://localhost:8001/main/view/logs/:Username',{
+        method: "post",
+        body: JSON.stringify({Username}),
+        headers: {
+          'Accepted': 'applciation/json',
+          'Content-Type': 'application/json'
+        }
+      })
         .then(data => data.json())
         .then((data) => {
             // console.log(data);
@@ -37,6 +46,8 @@ class View extends Component{
             })
         });
 
+    
+      // console.log(this.props.name)
     // this.handleChange = this.handleChange.bind(this);
   }
 

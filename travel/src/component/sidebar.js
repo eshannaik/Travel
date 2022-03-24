@@ -50,7 +50,7 @@ const Sidebar = () => {
                         activeItemId={location.pathname}
                         items={[
                             {
-                                title: 'Home',
+                                title: 'Logout',
                                 itemId: "/",
                                 elemBefore: () => <i className='fa fa-home fa-solid' />
                             }

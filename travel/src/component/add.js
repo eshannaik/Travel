@@ -33,20 +33,34 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AddLog(){
+export default function AddLog(props){
   const classes = useStyles();
 
   const [Title, setTitle] = useState("");
   const [Description, setDescription] = useState("");
   const [Date_added, setDate] = useState("");
-
+  
   const handleOnSubmit = async (e) =>{
     e.preventDefault();
+
+    // let result = axios.post("",user)
+    //   .then(res =>{
+
+    //   })
+    //   .catch(
+    //     alert(result.msg)
+    //     setTitle("");
+    //     setDescription("");
+    //     setDate("");
+    //   )
+
+    let Username = props.name
+    // console.log(Username)
 
     let result = await fetch (
       'http://localhost:8001/main/add',{
         method: "post",
-        body: JSON.stringify({Title,Description,Date_added}),
+        body: JSON.stringify({Username,Title,Description,Date_added}),
         headers: {
           'Content-Type': 'application/json'
         }
@@ -61,6 +75,7 @@ export default function AddLog(){
       setDescription("");
       setDate("");
     }
+    // console.log(props.name)
   }
 
   return(

@@ -49,14 +49,16 @@ app.post('/main/add',async (req,res) => {
     }
 })
 
-app.delete('/main/remove/:Title',async (req,res) => {
+app.delete('/main/remove/:Username/:Title',async (req,res) => {
+    const u = req.body.Username
     const t = req.body.Title
-    // console.log(t);
-    Log.findOne({Title:t})
+    // console.log(t)
+    Log.findOne({Username : u,Title : t})
     .then( item => {
+        // console.log(item.Username)
         if(item){
             Log.deleteOne({Title: t})
-            .then(item => {
+            .then(i => {
                 res.json({msg :"Item remove from the database"});
             })
         }
@@ -66,20 +68,32 @@ app.delete('/main/remove/:Title',async (req,res) => {
     });
 })
 
-// app.put('/main/update/:Title',async (req,res) => {
-//     const t = req.body.Title
-//     // console.log(t);
-//     Log.updateOne({Title: t})
-//         .then(item => {
-//             res.send("item removed from database");
-//         })
-//         .catch(err => {
-//             res.status(400).send("unable to remove item from database");
-//         });
-// })
+app.post('/main/view/logs/:Username',async (req,res) => {
+    const u = req.body.Username
+    // console.log(u)
+    Log.find({Username : u})
+    .exec(function(err,l){
+        if(err){
+            res.json({msg : "Error retrieving logs:" + err })
+        }else{
+            res.json(l);
+        }
+    });
+})
 
-app.get('/main/view',async (req,res) => {
+app.get('/main/view/items',async (req,res) => {
     Log.find({})
+    .exec(function(err,l){
+        if(err){
+            res.json({msg : "Error retrieving logs"})
+        }else{
+            res.json(l);
+        }
+    });
+})
+
+app.get('/main/view/user',async (req,res) => {
+    SL.find({})
     .exec(function(err,l){
         if(err){
             console.log("Error retrieving logs")
@@ -88,17 +102,6 @@ app.get('/main/view',async (req,res) => {
         }
     });
 })
-
-// app.get('/main/view/user',async (req,res) => {
-//     Log.find({})
-//     .exec(function(err,l){
-//         if(err){
-//             console.log("Error retrieving logs")
-//         }else{
-//             res.json(l);
-//         }
-//     });
-// })
 
 app.post('/main/signin',async(req,res) => {
     const uname = req.body.Username;
@@ -115,7 +118,7 @@ app.post('/main/signin',async(req,res) => {
             }
             else{
                 if(pword == user.Password)
-                    return res.status(400).json({msg:'Logged in',res:true})
+                    return res.status(400).json({msg:'Logged in',res:true,name:uname})
                 else
                     return res.status(400).json({ msg: 'Invalid credentials',res:false});
             }

@@ -1,17 +1,19 @@
 import './App.css';
 import {BrowserRouter,Route,Routes} from 'react-router-dom'
-import Sidebar from './component/sidebar';
-import AddLog from './component/add';
-import RemoveLog from './component/remove';
-import Header from './component/Header';
-import SignIn from './component/SignIn';
-import SignUp from './component/SignUp';
-import View from './component/View';
-import AboutMe from './component/about me';
-import Home from './component/Home';
-import ForgotPassword from './component/forgot';
-// import UpdateLog from './component/update';
-import {useState} from 'react';
+import {useState, Suspense, lazy} from 'react';
+
+const Home = lazy (() => import("./component/Home"))
+const SignIn = lazy (() => import("./component/SignIn"))
+const SignUp = lazy (() => import("./component/sidebar"))
+const ForgotPassword = lazy (() => import("./component/forgot"))
+const Header = lazy (() => import("./component/Header"))
+const Sidebar = lazy (() => import("./component/sidebar"))
+const AddLog = lazy (() => import("./component/add"))
+const RemoveLog = lazy (() => import("./component/remove"))
+const View = lazy (() => import("./component/View"))
+const AboutMe = lazy (() => import("./component/about me"))
+
+
 
 function App() {
   const [user,setLoginUser] = useState()
@@ -21,6 +23,9 @@ function App() {
   return (
     <div>
         <BrowserRouter>
+          <Suspense fallback = { 
+            <div> Loading.... </div>
+          }>
           <Routes>
             <Route path="/" element={
                 <div>
@@ -102,6 +107,7 @@ function App() {
               />
 
             </Routes>
+            </Suspense>
         </BrowserRouter>
     </div>
   );

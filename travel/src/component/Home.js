@@ -5,7 +5,7 @@ import './Home.css'
 const Home = () =>{
     return(
         <div>
-            <div className="scale-in-center" id="welcome">
+            <div className="welcome" id="scale-in-center">
                 <div style={{color:"white"}}>
                     <h1>Travel Log</h1>
                 </div>

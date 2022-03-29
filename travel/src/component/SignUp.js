@@ -14,6 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import  {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
+import Grid from '@material-ui/core/Grid';
 
 function Copyright() {
   return (
@@ -134,6 +135,19 @@ export default function SignUp() {
           >
             Sign In
           </Button>
+
+          <Grid container>
+            <Grid item xs>
+              <Link href="/main/forgot" variant="body2">
+                Forgot password?
+              </Link>
+            </Grid>
+            <Grid item>
+              <Link href="/main/signin" variant="body2">
+                {"Have an account? Sign In"}
+              </Link>
+            </Grid>
+          </Grid>
           
         </form>
       </div>

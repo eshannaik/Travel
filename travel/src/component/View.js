@@ -28,7 +28,7 @@ class View extends Component{
         Date_added: ''
     };
     let Username = props.name
-    console.log(JSON.stringify({Username}))
+    // console.log(JSON.stringify({Username}))
     fetch(
       'http://localhost:8001/main/view/logs/:Username',{
         method: "post",

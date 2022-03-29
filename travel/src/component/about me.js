@@ -2,13 +2,21 @@ import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css'
 import './about me.css'
 import {Link} from 'react-router-dom';
 import Button from '@material-ui/core/Button';
+import { useNavigate } from 'react-router';
 
 const AboutMe = () =>{
+    const navigate = useNavigate();
+
+    const handleClick = async () => {
+        let path = "/main/add"
+        navigate(path)
+    }
+
     return(
         <div>
-            <div id="welcome">
+            <div className="welcome">
                 <div>
-                    <div style={{backgroundColor:"grey" ,color:"white" ,margin: "50px"}}>
+                    <div className="stuff">
                         <h1><center>About Me</center></h1>
                         <br></br>
                         <br></br>
@@ -17,10 +25,15 @@ const AboutMe = () =>{
                         <br></br>
 
                         <center>
-                            <Button>
-                                <Link to='/main/add'>
-                                    Go back
-                                </Link> 
+                            <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            onClick={handleClick}
+                            id="button"
+                            >
+                                Go Back
                             </Button>
                         </center>
                     </div>

@@ -1,10 +1,11 @@
 import './App.css';
 import {BrowserRouter,Route,Routes} from 'react-router-dom'
 import {useState, Suspense, lazy} from 'react';
+import ProtectedRoute from './protectedRoutes';
 
 const Home = lazy (() => import("./component/Home"))
 const SignIn = lazy (() => import("./component/SignIn"))
-const SignUp = lazy (() => import("./component/sidebar"))
+const SignUp = lazy (() => import("./component/SignUp"))
 const ForgotPassword = lazy (() => import("./component/forgot"))
 const Header = lazy (() => import("./component/Header"))
 const Sidebar = lazy (() => import("./component/sidebar"))
@@ -38,7 +39,7 @@ function App() {
             <Routes>
               <Route path="/main/signin" element={
                 <div>
-                  {/* <Header /> */}
+                  <Header />
                   <SignIn setUserName={setUserName} setLoginUser={setLoginUser}  />
                 </div>
               }
@@ -46,7 +47,7 @@ function App() {
 
               <Route path="/main/signup" element={
                 <div>
-                  {/* <Header /> */}
+                  <Header />
                   <SignUp />
                 </div>
               }
@@ -54,13 +55,14 @@ function App() {
 
               <Route path="/main/forgot" element={
                   <div>
-                    {/* <Header /> */}
+                    <Header />
                     <ForgotPassword />
                   </div>
                 }
               />
+            
               
-              <Route path="/main/add" element={
+              {/* <ProtectedRoute path="/main/add" element={
                   user === true ?
                     <div>
                       <Header />
@@ -74,40 +76,52 @@ function App() {
                       <SignIn setLoginUser={setLoginUser} />
                     </div>
               } 
-              />
+              /> */}
+              <Route element = {<ProtectedRoute auth = {user}/>}>
+                <Route path="/main/add" element={ 
+                        <div>
+                          <Header />
+                          <div className='flexbox-container'>
+                            <Sidebar />
+                            <AddLog name = {uname} />
+                          </div>
+                        </div>
+                      } 
+                    /> 
 
-              <Route path="/main/remove" element={
-                <div>
-                  <Header />
-                  <div className='flexbox-container'>
-                    <Sidebar/>
-                    <RemoveLog name = {uname}/>
+                <Route path="/main/remove" element={
+                  <div>
+                    <Header />
+                    <div className='flexbox-container'>
+                      <Sidebar/>
+                      <RemoveLog name = {uname}/>
+                    </div>
                   </div>
-                </div>
-              } 
-              />
+                } 
+                />
 
-              <Route path="/main/view" element={
-                <div>
-                  <Header />
-                  <div className='flexbox-container'>
-                    <Sidebar/>
-                    <View name = {uname}/>
+                <Route path="/main/view" element={
+                  <div>
+                    <Header />
+                    <div className='flexbox-container'>
+                      <Sidebar/>
+                      <View name = {uname}/>
+                    </div>
                   </div>
-                </div>
-              } 
-              />
+                } 
+                />
+              </Route>
 
               <Route path="/aboutme" element={
-                <div>
-                  {/* <Header /> */}
-                  <AboutMe />
-                </div>
-              }
-              />
+                  <div>
+                    {/* <Header /> */}
+                    <AboutMe />
+                  </div>
+                }
+                />
 
             </Routes>
-            </Suspense>
+          </Suspense>
         </BrowserRouter>
     </div>
   );

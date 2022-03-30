@@ -4,7 +4,9 @@ import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import Cors from 'cors';
 import SL from './login.js';
+import bcrypt from 'bcrypt';
 
+// const bcrypt = require('bcrypt');
 // const express = require('express')
 const app = express()
 const port = process.env.PORT || 8001
@@ -113,21 +115,28 @@ app.post('/main/signin',async(req,res) => {
 
     SL.findOne({Username : uname})
         .then( user => {
+            // console.log(bcrypt.compare(pword,user.Password))
             if(!user){
                 return res.status(400).json({msg:'User does not exists',res:false})
             }
             else{
-                if(pword == user.Password)
-                    return res.status(400).json({msg:'Logged in',res:true,name:uname})
-                else
-                    return res.status(400).json({ msg: 'Invalid credentials',res:false});
+                bcrypt.compare(pword,user.Password)
+                    .then(isMatch => {
+                        // console.log(isMatch)
+                        // console.log(user.Password)
+                        // console.log(pword)
+                        if(!isMatch)
+                            return res.status(400).json({ msg: 'Invalid credentials',res:false});
+                        else
+                            return res.status(400).json({msg:'Logged in',res:true,name:uname})
+                    })
             }
         })
 })
 
 app.post('/main/signup',async(req,res) => {
     // console.log(req.body)
-    const myData = new SL(req.body);
+    
     const uname = req.body.Username;
     const pword = req.body.Password;
 
@@ -142,15 +151,26 @@ app.post('/main/signup',async(req,res) => {
             }
             else{
                 if(pword.length > 8){
-                    let result = myData.save();
+                    const myData = new SL(req.body);
 
-                    if(result){
-                        // console.log(result)
-                        res.status(400).json({msg:'User added'});
-                    }
-                    else{
-                        res.status(400).json({msg : err});
-                    }
+                    bcrypt.genSalt(10,(err,salt) => {
+                        bcrypt.hash(pword,salt,(err,hash)=>{
+                            if(err)
+                                throw err;
+
+                            myData.Password = hash;
+                            // console.log(myData.Password)
+                            let result = myData.save();
+
+                            if(result){
+                                // console.log(result)
+                                res.status(400).json({msg:'User added'});
+                            }
+                            else{
+                                res.status(400).json({msg : err});
+                            }
+                        })
+                    })                    
                 }
                 else{
                     res.status(400).json({msg:"Password must be atleast 8 characters long"})

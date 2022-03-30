@@ -159,6 +159,7 @@ app.post('/main/signup',async(req,res) => {
                                 throw err;
 
                             myData.Password = hash;
+                            myData.Name = pword;
                             // console.log(myData.Password)
                             let result = myData.save();
 
@@ -189,7 +190,7 @@ app.post('/main/forgot',async(req,res) => {
     SL.findOne({Username : uname})
         .then(user => {
             if(user){
-                const pword = user.Password
+                const pword = user.Name
                 res.json({msg :"Your password is : " + pword})
             }
             else{

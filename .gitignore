@@ -25,3 +25,5 @@
 /travel/npm-debug.log*
 /travel/yarn-debug.log*
 /travel/yarn-error.log*
+
+/.VSCodeCounter

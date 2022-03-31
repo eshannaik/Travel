@@ -1,8 +1,11 @@
-import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css'
 import './about me.css'
 // import {Link} from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { useNavigate } from 'react-router';
+import GitHubIcon from '@material-ui/icons/GitHub';
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import IconButton from '@material-ui/core/IconButton';
+import ArticleIcon from '@material-ui/icons/FileCopy';
 
 const AboutMe = () =>{
     const navigate = useNavigate();
@@ -10,6 +13,18 @@ const AboutMe = () =>{
     const handleClick = async () => {
         let path = "/main/add"
         navigate(path)
+    }
+
+    const handlePageChangeGitHub = () => {
+        window.open('https://github.com/eshannaik');
+    }
+
+    const handlePageChangeLinkedin = () => {
+        window.open('https://www.linkedin.com/in/eshan-naik-567573197/');
+    }
+
+    const handlePageChangePortfolio = () => {
+        window.open('https://eshan-naik.netlify.app/')
     }
 
     return(
@@ -20,7 +35,48 @@ const AboutMe = () =>{
                         <h1><center>About Me</center></h1>
                         <br></br>
                         <br></br>
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc.</p>
+                        
+                        <div className = "main">
+                            <div className="header">
+                                <div className="intro">
+                                    <h2>Hello,</h2>
+                                    <h1><b>My name is <span style={{color:"blue"}}>Eshan Naik</span>,</b></h1>
+                                    <p>
+                                        I am a fourth year Computer Science Engineering student.
+                                        This webpage was made to help me understand the concepts on the MERN stack. 
+                                    </p>
+                                    <p>
+                                        If you want to use this project or you want to contact me please follow any of the below given links
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="Contact_Me">
+                            <h1><center>Contact Me</center></h1>
+                                <p>
+                                    <center>
+                                        <IconButton>
+                                            Email : eshannaik96@gmail.com
+                                        </IconButton>
+                                        <div>
+                                        <IconButton>
+                                                GitHub : 
+                                                <GitHubIcon onClick={handlePageChangeGitHub} fontSize="large" style={{color:"black"}} />
+                                        </IconButton>
+                                        <IconButton>
+                                                LinkedIn :
+                                                <LinkedInIcon onClick={handlePageChangeLinkedin} fontSize="large" style={{color:"black"}} />
+                                        </IconButton>
+                                        <IconButton>
+                                                Portfolio :
+                                                <ArticleIcon onClick={handlePageChangePortfolio} fontSize="large" style={{color:"black"}} />
+                                        </IconButton>
+                                        </div>
+                                    </center>
+                                </p>
+                        </div>
+
                         <br></br>
                         <br></br>
 

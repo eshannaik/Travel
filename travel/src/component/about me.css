@@ -25,3 +25,18 @@
     width:100px;
     margin-bottom:20px;
 }
+
+.Contact_Me{
+    background-color: grey;
+    height: 150px;
+    /* border-top: 1px solid white; */
+    /* box-shadow: 10px 5px 5px white; */
+}
+
+.main{
+    color: white;
+}
+
+.intro{
+    flex-direction: column;
+}

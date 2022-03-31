@@ -184,7 +184,7 @@ app.post('/main/forgot',async(req,res) => {
     const uname = req.body.Username;
 
     if(!uname){
-        return res.status(400).json({msg: ' Please enter your username'})
+        return res.status(400).json({msg: 'Please enter your username'})
     }
 
     SL.findOne({Username : uname})
@@ -194,7 +194,7 @@ app.post('/main/forgot',async(req,res) => {
                 res.json({msg :"Your password is : " + pword})
             }
             else{
-                res.status(400).json({msg:"Password must be atleast 8 characters long"})
+                res.status(400).json({msg:"Email Address doesn't exist"})
             }
         })
 })

@@ -2,7 +2,7 @@
 
 ### This is a Travel Log project made entirely by me. 
 
-### To see the demo of this project please <a href="https://eshan-naik.netlify.app" target="_blank" rel="noopener noreferrer">click here</a>
+### To see the demo of this project please <a href="https://travel-log-eshan-naik.netlify.app" target="_blank" rel="noopener noreferrer">click here</a>
  __________________________________________________________________________________________________________________________________________________
 #### You can use email as "abcd@gmail.com" and password as "123456789"
 

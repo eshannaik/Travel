@@ -1,6 +1,6 @@
 import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css'
 import './about me.css'
-import {Link} from 'react-router-dom';
+// import {Link} from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { useNavigate } from 'react-router';
 

@@ -1,40 +1,40 @@
 [[redirects]]
-from = "http://localhost:3000/"
-to = "https://travel-log-eshan-naik.netlify.app/"
+from = "/"
+to = "/"
 status = 301
 force = false
 [[redirects]]
-from = "http://localhost:3000/main/signin"
-to = "https://travel-log-eshan-naik.netlify.app/signin"
+from = "/main/signin"
+to = "/main/signin"
 status = 301
 force = false
 [[redirects]]
-from = "http://localhost:3000/main/signup"
-to = "https://travel-log-eshan-naik.netlify.app/signup"
+from = "/main/signup"
+to = "/main/signup"
 status = 301
 force = false
 [[redirects]]
-from = "http://localhost:3000/main/forgot"
-to = "https://travel-log-eshan-naik.netlify.app/forgot"
+from = "/main/forgot"
+to = "/main/forgot"
 status = 301
 force = false
 [[redirects]]
-from = "http://localhost:3000/main/add"
-to = "https://travel-log-eshan-naik.netlify.app/add"
+from = "/main/add"
+to = "/main/add"
 status = 301
 force = false
 [[redirects]]
-from = "http://localhost:3000/main/remove"
-to = "https://travel-log-eshan-naik.netlify.app/remove"
+from = "/main/remove"
+to = "/main/remove"
 status = 301
 force = false
 [[redirects]]
-from = "http://localhost:3000/main/view"
-to = "https://travel-log-eshan-naik.netlify.app/view"
+from = "/main/view"
+to = "/main/view"
 status = 301
 force = false
 [[redirects]]
-from = "http://localhost:3000/main/aboutme"
-to = "https://travel-log-eshan-naik.netlify.app/aboutme"
+from = "/main/aboutme"
+to = "/main/aboutme"
 status = 301
 force = false

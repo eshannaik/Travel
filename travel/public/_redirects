@@ -1,8 +1,8 @@
-/             https://travel-log-eshan-naik.netlify.app/
-/main/signin  https://travel-log-eshan-naik.netlify.app/signin
-/main/signup  https://travel-log-eshan-naik.netlify.app/signup
-/main/forgot  https://travel-log-eshan-naik.netlify.app/forgot
-/main/add     https://travel-log-eshan-naik.netlify.app/add
-/main/remove  https://travel-log-eshan-naik.netlify.app/remove
-/main/view    https://travel-log-eshan-naik.netlify.app/view
-/main/aboutme https://travel-log-eshan-naik.netlify.app/aboutme
+http://localhost:3000/             https://travel-log-eshan-naik.netlify.app/
+http://localhost:3000/main/signin  https://travel-log-eshan-naik.netlify.app/signin
+http://localhost:3000/main/signup  https://travel-log-eshan-naik.netlify.app/signup
+http://localhost:3000/main/forgot  https://travel-log-eshan-naik.netlify.app/forgot
+http://localhost:3000/main/add     https://travel-log-eshan-naik.netlify.app/add
+http://localhost:3000/main/remove  https://travel-log-eshan-naik.netlify.app/remove
+http://localhost:3000/main/view    https://travel-log-eshan-naik.netlify.app/view
+http://localhost:3000/main/aboutme https://travel-log-eshan-naik.netlify.app/aboutme

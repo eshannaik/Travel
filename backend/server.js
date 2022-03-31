@@ -150,7 +150,7 @@ app.post('/main/signup',async(req,res) => {
                 res.status(400).json({msg:'User already exists'})
             }
             else{
-                if(pword.length > 8){
+                if(pword.length > 7){
                     const myData = new SL(req.body);
 
                     bcrypt.genSalt(10,(err,salt) => {

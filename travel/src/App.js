@@ -25,7 +25,7 @@ function App() {
     <div>
         <BrowserRouter>
           <Suspense fallback = { 
-            <div> Loading.... </div>
+            <div><center><h1>Loading....</h1></center></div>
           }>
           <Routes>
             <Route path="/" element={

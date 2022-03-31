@@ -16,7 +16,16 @@ app.use(Cors());
 
 // const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/travel', {
+// mongoose.connect('mongodb://localhost:27017/travel', {
+//     useNewUrlParser: true
+//     }).then(() => {
+//     console.log('Database connected sucessfully !')
+//     },
+//     error => {
+//         console.log('Database could not be connected : ' + error)
+//     }
+// )
+mongoose.connect('mongodb+srv://Eshan_Naik:Eshan$2000@cluster0.nqves.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
     useNewUrlParser: true
     }).then(() => {
     console.log('Database connected sucessfully !')

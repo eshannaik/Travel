@@ -1,40 +1,5 @@
 [[redirects]]
-from = "/"
-to = "/"
-status = 301
-force = false
-[[redirects]]
-from = "/main/signin"
-to = "/main/signin"
-status = 301
-force = false
-[[redirects]]
-from = "/main/signup"
-to = "/main/signup"
-status = 301
-force = false
-[[redirects]]
-from = "/main/forgot"
-to = "/main/forgot"
-status = 301
-force = false
-[[redirects]]
-from = "/main/add"
-to = "/main/add"
-status = 301
-force = false
-[[redirects]]
-from = "/main/remove"
-to = "/main/remove"
-status = 301
-force = false
-[[redirects]]
-from = "/main/view"
-to = "/main/view"
-status = 301
-force = false
-[[redirects]]
-from = "/main/aboutme"
-to = "/main/aboutme"
-status = 301
-force = false
+
+  from = "/*"
+  to = "/"
+  status = 200

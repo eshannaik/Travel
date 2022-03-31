@@ -11,7 +11,7 @@ const Home = () =>{
                 </div>
                 <br></br>
 
-                <p><Link variant="h4" color="secondary" href = "http://localhost:3000/main/signin">
+                <p><Link variant="h4" color="secondary" href = "/main/signin">
                         {'Click to get started'}
                 </Link></p>
             </div>

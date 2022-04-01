@@ -13,7 +13,7 @@ const AddLog = lazy (() => import("./component/add"))
 const RemoveLog = lazy (() => import("./component/remove"))
 const View = lazy (() => import("./component/View"))
 const AboutMe = lazy (() => import("./component/about me"))
-
+const RemoveUser = lazy(() => import("./component/removeUser"))
 
 
 function App() {
@@ -109,6 +109,17 @@ function App() {
                     </div>
                   </div>
                 } 
+                />
+
+                <Route path="/main/removeUser" element={
+                  <div>
+                    <Header />
+                    <div className='flexbox-container'>
+                      <Sidebar/>
+                      <RemoveUser/>
+                    </div>
+                  </div>
+                }
                 />
               </Route>
 

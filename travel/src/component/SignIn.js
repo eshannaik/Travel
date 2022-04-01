@@ -16,7 +16,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" href="https://travel-log-eshan-naik.netlify.app/">
         Your Website
       </Link>{' '}
       {new Date().getFullYear()}
@@ -64,7 +64,7 @@ export default function SignIn({setUserName,setLoginUser}) {
     e.preventDefault();
 
     let r = await fetch (
-      'http://localhost:8001/main/signin',{
+      'http://localhost:5000/main/signin',{
       method: 'post',
       body: JSON.stringify({Username,Password}),
       headers: {

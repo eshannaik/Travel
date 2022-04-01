@@ -9,7 +9,7 @@ import bcrypt from 'bcrypt';
 // const bcrypt = require('bcrypt');
 // const express = require('express')
 const app = express()
-const port = process.env.PORT || 8001
+const port = process.env.PORT || 5000
 
 app.use(express.json())
 app.use(Cors());
@@ -25,7 +25,7 @@ mongoose.Promise = global.Promise;
 //         console.log('Database could not be connected : ' + error)
 //     }
 // )
-mongoose.connect('mongodb+srv://Eshan_Naik:Eshan$2000@cluster0.nqves.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
+mongoose.connect('mongodb+srv://Eshan_Naik:Password123@cluster0.nqves.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
     useNewUrlParser: true
     }).then(() => {
     console.log('Database connected sucessfully !')
@@ -191,21 +191,55 @@ app.post('/main/signup',async(req,res) => {
 
 app.post('/main/forgot',async(req,res) => {
     const uname = req.body.Username;
+    const pword = req.body.Password;
 
-    if(!uname){
+    if(!uname || !pword){
         return res.status(400).json({msg: 'Please enter your username'})
     }
 
-    SL.findOne({Username : uname})
-        .then(user => {
-            if(user){
-                const pword = user.Name
-                res.json({msg :"Your password is : " + pword})
+    if(pword.length > 7){
+        SL.findOne({Username:uname})
+            .then(user => {
+                bcrypt.genSalt(10,(err,salt) => {
+                    bcrypt.hash(pword,salt,(err,hash)=>{
+                        if(err)
+                            throw err;
+
+                        req.body.Password = hash;
+
+                        SL.findByIdAndUpdate({_id : user._id},req.body)
+                            .then(u => {
+                                if(u){
+                                    res.json({msg :"Your password has been updated"})
+                                }
+                                else{
+                                    res.status(400).json({msg:"Email Address doesn't exist"})
+                                }
+                            }
+                        )
+                    })
+                }) 
             }
-            else{
-                res.status(400).json({msg:"Email Address doesn't exist"})
-            }
-        })
+        )
+    }
+})
+
+app.delete('/main/removeUser/:Username',async (req,res) => {
+    const u = req.body.Username
+    console.log(u)
+    SL.findOne({Username : u})
+    .then( item => {
+        // console.log(item.Username)
+        if(item){
+            SL.deleteOne({Username: u})
+            .then(i => {
+                res.json({msg :"User remove from the database"});
+            })
+        }
+        else{
+            res.status(400).json({msg :"No user with this username exists"});
+        }
+    });
 })
 
 app.listen(port,() => {

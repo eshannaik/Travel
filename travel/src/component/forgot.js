@@ -20,7 +20,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" href="https://travel-log-eshan-naik.netlify.app/">
         Your Website
       </Link>{' '}
       {new Date().getFullYear()}
@@ -54,6 +54,7 @@ export default function ForgotPassword() {
 
   let navigate = useNavigate();
   const [Username,setEmail] = useState('');
+  const [Password,setPassword] = useState('');
 
   const validateForm = async () => {
     return Username.length > 0;
@@ -63,9 +64,9 @@ export default function ForgotPassword() {
     e.preventDefault();
 
     let result = await fetch (
-      'http://localhost:8001/main/forgot',{
+      'http://localhost:5000/main/forgot',{
         method: "post",
-        body: JSON.stringify({Username}),
+        body: JSON.stringify({Username,Password}),
         headers: {
           'Content-Type': 'application/json'
         }
@@ -76,6 +77,7 @@ export default function ForgotPassword() {
     if(result){
       alert(result.msg)
       setEmail("");
+      setPassword("")
     }
 
     let path = "/main/signin"
@@ -90,7 +92,7 @@ export default function ForgotPassword() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Get Password
+          Update Password
         </Typography>
         <form className={classes.form}>
           <TextField
@@ -108,6 +110,20 @@ export default function ForgotPassword() {
             type="username" 
           />
 
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            id="password"
+            autoComplete="current-password"
+            value={Password}
+            onChange = {(e) => setPassword(e.target.value)}
+            type="password"
+          />
+
           <Button
             type="submit"
             fullWidth
@@ -117,7 +133,7 @@ export default function ForgotPassword() {
             disabled = {!validateForm}
             onClick={handleSubmit}
           >
-            Get Password
+            Update Password
           </Button>
 
           <Grid container>

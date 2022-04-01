@@ -9,6 +9,12 @@ import 'font-awesome/css/font-awesome.min.css';
 const Sidebar = () => {
     const navigate = useNavigate();
     const location = useLocation();
+
+    const logout = () => {
+        localStorage.clear();
+        window.location.href = '/';
+    }
+
     // const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
     return (
@@ -36,11 +42,11 @@ const Sidebar = () => {
                             itemId: '/main/view',
                             elemBefore: () => <i className='fa fa-eye fa-solid' />
                         },
-                        // {
-                        //     title: 'Update a log',
-                        //     itemId: '/main/update',
-                        //     // elemBefore: () => <Icon name="eye"/>
-                        // },
+                        {
+                            title: 'Remove User',
+                            itemId: '/main/removeUser',
+                            elemBefore: () => <i className='fa fa-remove fa-solid' />
+                        }
                     ]}
                 />
 
@@ -48,16 +54,14 @@ const Sidebar = () => {
                     <Navigation
                         className='absolute bottom-0 w-full my-8'
                         activeItemId={location.pathname}
+                        onSelect = {logout}
                         items={[
                             {
                                 title: 'Logout',
                                 itemId: "/",
                                 elemBefore: () => <i className='fa fa-home fa-solid' />
-                            }
+                            },
                         ]}
-                        onSelect={({itemId}) =>{
-                            navigate(itemId);
-                        }}
                     />   
                 </div>
             </div>

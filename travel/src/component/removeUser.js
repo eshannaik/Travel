@@ -13,21 +13,21 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import  {useState} from 'react';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://travel-log-eshan-naik.netlify.app/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+// function Copyright() {
+//   return (
+//     <Typography variant="body2" color="textSecondary" align="center">
+//       {'Copyright © '}
+//       <Link color="inherit" href="https://travel-log-eshan-naik.netlify.app/">
+//         Your Website
+//       </Link>{' '}
+//       {new Date().getFullYear()}
+//       {'.'}
+//     </Typography>
+//   );
+// }
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -49,24 +49,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignUp() {
+export default function RemoveUser() {
   const classes = useStyles();
 
-  const navigate = useNavigate();
-  const [Username,setEmail] = useState('');
-  const [Password,setPassword] = useState('');
+  const [Username,setUsername] = useState('');
 
   const validateForm = async () => {
-    return Username.length > 0 && Password.length > 0;
+    return Username.length > 0;
   }
 
-  const handleSubmit = async (e) => {
+  const onHandleSubmit = async (e) => {
     e.preventDefault();
 
-    let result = await fetch (
-      'http://localhost:5000/main/signup',{
-        method: "post",
-        body: JSON.stringify({Username,Password}),
+    let result = await fetch(
+      'http://localhost:5000/main/removeUser/:Username',{
+        method: "delete",
+        body: JSON.stringify({Username}),
         headers: {
           'Content-Type': 'application/json'
         }
@@ -76,14 +74,13 @@ export default function SignUp() {
     result = await result.json();
     if(result){
       alert(result.msg)
-      setEmail("");
-      setPassword("");;
+      console.log(result.msg);
+      setUsername("");
     }
 
-    let path = "/main/signin"
-    navigate(path)
+    localStorage.clear();
+    window.location.href = '/';
   }
-
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -92,8 +89,10 @@ export default function SignUp() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign Up
+          Remove User
         </Typography>
+        <br></br>
+          <h5>Please re-enter your email address to remove your account</h5>
         <form className={classes.form}>
           <TextField
             variant="outlined"
@@ -106,22 +105,8 @@ export default function SignUp() {
             autoComplete="email"
             autoFocus
             value={Username}
-            onChange = {(e) => setEmail(e.target.value)}
+            onChange = {(e) => setUsername(e.target.value)}
             type="username" 
-          />
-
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            id="password"
-            autoComplete="current-password"
-            value={Password}
-            onChange = {(e) => setPassword(e.target.value)}
-            type="password"
           />
 
           <Button
@@ -131,29 +116,29 @@ export default function SignUp() {
             color="primary"
             className={classes.submit}
             disabled = {!validateForm}
-            onClick={handleSubmit}
+            onClick={onHandleSubmit}
           >
-            Sign In
+            Remove User
           </Button>
 
-          <Grid container>
+          {/* <Grid container>
             <Grid item xs>
-              <Link href="/main/forgot" variant="body2">
-                Forgot password?
+              <Link href="/main/signin" variant="body2">
+                Go back
               </Link>
             </Grid>
             <Grid item>
-              <Link href="/main/signin" variant="body2">
-                {"Have an account? Sign In"}
+              <Link href="/main/signup" variant="body2">
+                {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
-          </Grid>
-          
+          </Grid> */}
+
         </form>
       </div>
-      <Box mt={8}>
+      {/* <Box mt={8}>
         <Copyright />
-      </Box>
+      </Box> */}
     </Container>
   );
 }

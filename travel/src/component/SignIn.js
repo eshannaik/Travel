@@ -16,7 +16,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://travel-log-eshan-naik.netlify.app/">
+      <Link color="inherit" href="https://eshan-naik.netlify.app/">
         Your Website
       </Link>{' '}
       {new Date().getFullYear()}

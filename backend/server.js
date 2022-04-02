@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import Cors from 'cors';
 import SL from './login.js';
 import bcrypt from 'bcrypt';
+// import axios from 'axios';
 
 // const bcrypt = require('bcrypt');
 // const express = require('express')
@@ -13,6 +14,17 @@ const port = process.env.PORT || 5000
 
 app.use(express.json())
 app.use(Cors());
+
+if (process.env.NODE_ENV === 'production') {
+    // Serve any static files
+    app.use(express.static(path.join(__dirname, '../travel/build')));
+
+    // Handle React routing, return all requests to React app
+    app.get('*', function(req, res) {
+        res.sendFile(path.join(__dirname, '../travel/build', 'index.html'));
+    });
+}
+
 
 // const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
@@ -60,7 +72,7 @@ app.post('/main/add',async (req,res) => {
     }
 })
 
-app.delete('/main/remove/:Username/:Title',async (req,res) => {
+app.delete('/main/remove',async (req,res) => {
     const u = req.body.Username
     const t = req.body.Title
     // console.log(t)
@@ -79,7 +91,7 @@ app.delete('/main/remove/:Username/:Title',async (req,res) => {
     });
 })
 
-app.post('/main/view/logs/:Username',async (req,res) => {
+app.post('/main/view/logs',async (req,res) => {
     const u = req.body.Username
     // console.log(u)
     Log.find({Username : u})
@@ -119,7 +131,7 @@ app.post('/main/signin',async(req,res) => {
     const pword = req.body.Password;
 
     if(!uname || !pword){
-        return res.status(400).json({msg: ' Please enter all fields',res:false})
+        return res.status(400).json({msg:'Please enter all fields',res:false})
     }
 
     SL.findOne({Username : uname})
@@ -135,7 +147,7 @@ app.post('/main/signin',async(req,res) => {
                         // console.log(user.Password)
                         // console.log(pword)
                         if(!isMatch)
-                            return res.status(400).json({ msg: 'Invalid credentials',res:false});
+                            return res.status(400).json({ msg:'Invalid credentials',res:false});
                         else
                             return res.status(400).json({msg:'Logged in',res:true,name:uname})
                     })
@@ -224,7 +236,7 @@ app.post('/main/forgot',async(req,res) => {
     }
 })
 
-app.delete('/main/removeUser/:Username',async (req,res) => {
+app.delete('/main/removeUser',async (req,res) => {
     const u = req.body.Username
     console.log(u)
     SL.findOne({Username : u})

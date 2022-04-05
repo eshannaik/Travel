@@ -107,11 +107,12 @@ export default function SignIn({setUserName,setLoginUser}) {
     // })
 
     let r = await fetch(
-      '/main/signin',{
+      'http://localhost:5000/main/signin',{
         method: "post",
         body: JSON.stringify({Username,Password}),
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
         }
       }
     )

@@ -58,7 +58,7 @@ export default function AddLog(props){
     // console.log(Username)
 
     let result = await fetch (
-        '/main/add',{
+      'http://localhost:5000/main/add',{
         method: "post",
         body: JSON.stringify({Username,Title,Description,Date_added}),
         headers: {

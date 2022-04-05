@@ -64,7 +64,7 @@ export default function ForgotPassword() {
     e.preventDefault();
 
     let result = await fetch (
-      '/main/forgot',{
+      'http://localhost:5000/main/forgot',{
         method: "post",
         body: JSON.stringify({Username,Password}),
         headers: {

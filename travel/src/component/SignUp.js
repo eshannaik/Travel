@@ -64,7 +64,7 @@ export default function SignUp() {
     e.preventDefault();
 
     let result = await fetch (
-      '/main/signup',{
+      's/main/signup',{
         method: "post",
         body: JSON.stringify({Username,Password}),
         headers: {

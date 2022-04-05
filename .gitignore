@@ -27,3 +27,5 @@
 /travel/yarn-error.log*
 
 /.VSCodeCounter
+
+/backend/.env

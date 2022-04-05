@@ -2,18 +2,22 @@ import Log from './tables.js';
 import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
-import Cors from 'cors';
+import cors from 'cors';
 import SL from './login.js';
 import bcrypt from 'bcrypt';
 // import axios from 'axios';
+// require("dotenv").config()
+import dotenv from 'dotenv';
 
+dotenv.config();
 // const bcrypt = require('bcrypt');
 // const express = require('express')
 const app = express()
 const port = process.env.PORT || 5000
 
-app.use(express.json())
-app.use(Cors());
+app.use(express.json());
+app.use(cors());
+
 
 if (process.env.NODE_ENV === 'production') {
     // Serve any static files
@@ -37,8 +41,10 @@ mongoose.Promise = global.Promise;
 //         console.log('Database could not be connected : ' + error)
 //     }
 // )
-mongoose.connect('mongodb+srv://Eshan_Naik:Password123@cluster0.nqves.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
-    useNewUrlParser: true
+
+mongoose.connect(process.env.MONGODB_CONNECTION_STRING, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
     }).then(() => {
     console.log('Database connected sucessfully !')
     },
@@ -129,6 +135,8 @@ app.get('/main/view/user',async (req,res) => {
 app.post('/main/signin',async(req,res) => {
     const uname = req.body.Username;
     const pword = req.body.Password;
+    // console.log(uname)
+    // console.log(pword)
 
     if(!uname || !pword){
         return res.status(400).json({msg:'Please enter all fields',res:false})
@@ -238,7 +246,7 @@ app.post('/main/forgot',async(req,res) => {
 
 app.delete('/main/removeUser',async (req,res) => {
     const u = req.body.Username
-    console.log(u)
+    // console.log(u)
     SL.findOne({Username : u})
     .then( item => {
         // console.log(item.Username)

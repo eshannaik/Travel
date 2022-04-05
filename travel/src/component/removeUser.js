@@ -58,7 +58,7 @@ export default function RemoveUser() {
     e.preventDefault();
 
     let result = await fetch(
-      'http://localhost:5000/main/removeUser',{
+      '/main/removeUser',{
         method: "delete",
         body: JSON.stringify({Username}),
         headers: {

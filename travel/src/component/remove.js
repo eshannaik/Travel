@@ -41,7 +41,7 @@ export default function RemoveLog(props) {
 
     let Username = props.name
     let result = await fetch(
-      'http://localhost:5000/main/remove',{
+      '/main/remove',{
         method: "delete",
         body: JSON.stringify({Username,Title}),
         headers: {
@@ -53,7 +53,7 @@ export default function RemoveLog(props) {
     result = await result.json();
     if(result){
       alert(result.msg)
-      console.log(result.msg);
+      // console.log(result.msg);
       setTitle("");
     }
   }

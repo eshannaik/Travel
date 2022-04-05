@@ -30,7 +30,7 @@ class View extends Component{
     let Username = props.name
     // console.log(JSON.stringify({Username}))
     fetch(
-      'http://localhost:5000/main/view/logs',{
+      '/main/view/logs',{
         method: "post",
         body: JSON.stringify({Username}),
         headers: {

@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useNavigate } from 'react-router-dom';
-// import axios from 'axios';
+import axios from 'axios';
 
 function Copyright() {
   return (
@@ -64,34 +64,65 @@ export default function SignIn({setUserName,setLoginUser}) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // let r = await axios.post('http://localhost:5000/main/signin',JSON.stringify({Username,Password}),{
-    //   'Accept': 'application/json',
-    //   'Content-Type': 'application/json',
-    // })
-    //   .then(r =>{
-    //     console.log(r.msg)
+    // var data = JSON.stringify({
+    //     "collection": "sls",
+    //     "database": "myFirstDatabase",
+    //     "dataSource": "Cluster0",
+    //     "projection": {
+    //         "_id": 1
+    //     }
+    // });
+                
+    // var config = {
+    //     // method: 'post',
+    //     // url: 'https://data.mongodb-api.com/app/data-xziqh/endpoint/data/beta/main/signin',
+    //     // headers: {
+            // 'Content-Type': 'application/json',
+            // 'Access-Control-Request-Headers': '*',
+            // 'api-key': '92wPoOkYVA4OPbjB9SS7CuSsGkbk5o4jxUyb8yrlfunnFL08Q1ATk8kvB1iTCdY3'
+    //     // },
+    //     data : data
+    // };
+            
+    // axios(config)
+    //   .then(function (response) {
+    //       console.log(JSON.stringify(response.data));
     //   })
-    //   .catch(err =>{
-    //     console.log(err.response)
-    //   })
+    //   .catch(function (error) {
+    //       console.log(error);
+    //   });
 
-    //   if(r){
-    //     alert(r.msg)
-    //     setLoginUser(r.res)
-    //     setUserName(r.name)
-    //     setEmail("");
-    //     setPassword("");
+    
+
+    // let r = await fetch (
+    //   'https://data.mongodb-api.com/app/data-xziqh/endpoint/data/beta/main/signin',{
+    //   mode: 'no-cors',
+    //   method: 'post',
+    //   body: JSON.stringify({Username,Password}),
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     'Access-Control-Request-Headers': '*',
+    //     'api-key': '92wPoOkYVA4OPbjB9SS7CuSsGkbk5o4jxUyb8yrlfunnFL08Q1ATk8kvB1iTCdY3'
     //   }
+    // })
 
-    let r = await fetch (
-      'http://localhost:5000/main/signin',{
-      method: 'post',
-      body: JSON.stringify({Username,Password}),
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
+    let r = await fetch(
+      '/main/signin',{
+        method: "post",
+        body: JSON.stringify({Username,Password}),
+        headers: {
+          'Content-Type': 'application/json'
+        }
       }
-    })
+    )
+    // .then(r => console.log(r.json()))
+    // .then(r => {
+    //   alert(r.msg)
+    //   setLoginUser(r.res)
+    //   setUserName(r.name)
+    //   setEmail("");
+    //   setPassword("");
+    // })
 
     r = await r.json();
     if(r){

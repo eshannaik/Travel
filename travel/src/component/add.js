@@ -11,7 +11,9 @@ import Container from '@material-ui/core/Container';
 // import Grid from '@material-ui/core/Grid';
 // import { Component } from 'react';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 // import 'react-notifications/lib/notifications.css';
+import { add_log } from './Redux/actions/generalActions';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -35,6 +37,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AddLog(props){
   const classes = useStyles();
+
+  let dispatch = useDispatch();
+  let mesg = '';
 
   const [Title, setTitle] = useState("");
   const [Description, setDescription] = useState("");
@@ -74,7 +79,16 @@ export default function AddLog(props){
       setTitle("");
       setDescription("");
       setDate("");
+      mesg = result.msg
     }
+
+    dispatch(add_log({
+      Username: Username,
+      Title: Title,
+      Description: Description,
+      Date_added: Date_added,
+      msg: mesg,
+    }))
     // console.log(props.name)
   }
 

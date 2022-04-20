@@ -1,11 +1,10 @@
 import {createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
-import promise from 'redux-promise-middleware';
-import rootReducer from './src/component/Redux/reducer';
+import rootReducer from './component/Redux/reducer';
 
 const initState = {};
 
-const store = createStore(rootReducer,promise,initState,compose(
+const store = createStore(rootReducer,initState,compose(
     applyMiddleware(...[thunk]),
     window.__REDUX_DEVTOOLS_EXTENSION__ && 
     window.__REDUX_DEVTOOLS_EXTENSION__()

@@ -2,6 +2,8 @@ import './App.css';
 import {BrowserRouter,Route,Routes} from 'react-router-dom'
 import {useState, Suspense, lazy} from 'react';
 import ProtectedRoute from './protectedRoutes';
+import store from './store';
+import { Provider } from 'react-redux';
 
 const Home = lazy (() => import("./component/Home"))
 const SignIn = lazy (() => import("./component/SignIn"))
@@ -23,6 +25,7 @@ function App() {
   // console.log(user === true)
   return (
     <div>
+      <Provider store = {store}>
         <BrowserRouter>
           <Suspense fallback = { 
             <div><center><h1>Loading....</h1></center></div>
@@ -134,6 +137,7 @@ function App() {
             </Routes>
           </Suspense>
         </BrowserRouter>
+      </Provider>
     </div>
   );
 }

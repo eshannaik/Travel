@@ -12,6 +12,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useNavigate } from 'react-router-dom';
 // import axios from 'axios';
+import { useDispatch } from 'react-redux' 
+import { loggedin,loggedin_failed } from './Redux/actions/authActions';
 
 function Copyright() {
   return (
@@ -54,6 +56,8 @@ export default function SignIn({setUserName,setLoginUser}) {
   //   Password:"",
   // })
   let navigate = useNavigate();
+  let dispatch = useDispatch();
+
   const [Username,setEmail] = useState('');
   const [Password,setPassword] = useState('');
 
@@ -63,6 +67,9 @@ export default function SignIn({setUserName,setLoginUser}) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    let exist = false;
+    let mesg = '';
 
     // var data = JSON.stringify({
     //     "collection": "sls",
@@ -118,11 +125,11 @@ export default function SignIn({setUserName,setLoginUser}) {
     )
     // .then(r => console.log(r.json()))
     // .then(r => {
-    //   alert(r.msg)
-    //   setLoginUser(r.res)
-    //   setUserName(r.name)
-    //   setEmail("");
-    //   setPassword("");
+      // alert(r.msg)
+      // setLoginUser(r.res)
+      // setUserName(r.name)
+      // setEmail("");
+      // setPassword("");
     // })
 
     r = await r.json();
@@ -132,10 +139,25 @@ export default function SignIn({setUserName,setLoginUser}) {
       setUserName(r.name)
       setEmail("");
       setPassword("");
+      exist = r.res;
+      mesg = r.msg;
     }
 
-    let path = "/main/add"
-    navigate(path)
+
+    if(exist === true){
+      let path = "/main/add"
+      navigate(path)
+
+      dispatch(loggedin({
+        Username : Username,
+        msg : mesg,
+      }))
+    }
+    else{
+      dispatch(loggedin_failed({
+        msg : mesg
+      }))
+    }
   }
 
   return (

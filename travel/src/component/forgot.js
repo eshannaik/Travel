@@ -15,6 +15,8 @@ import Container from '@material-ui/core/Container';
 import  {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
+import { useDispatch } from 'react-redux';
+import { update_password, update_password_failed} from './Redux/actions/authActions'
 
 function Copyright() {
   return (
@@ -53,6 +55,11 @@ export default function ForgotPassword() {
   const classes = useStyles();
 
   let navigate = useNavigate();
+  let dispatch = useDispatch();
+
+  let exist = false;
+  let mesg = '';
+
   const [Username,setEmail] = useState('');
   const [Password,setPassword] = useState('');
 
@@ -78,10 +85,24 @@ export default function ForgotPassword() {
       alert(result.msg)
       setEmail("");
       setPassword("")
+      exist = result.res
+      mesg = result.msg
+      // console.log(exist);
     }
 
-    let path = "/main/signin"
-    navigate(path)
+    if(exist === true){
+      let path = "/main/signin"
+      navigate(path)
+
+      dispatch(update_password({
+        msg : mesg,
+      }))
+    }
+    else{
+      dispatch(update_password_failed({
+        msg: mesg,
+      }))
+    }
   }
 
   return (

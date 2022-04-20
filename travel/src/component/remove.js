@@ -10,6 +10,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 // import Grid from '@material-ui/core/Grid';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { delete_log } from './Redux/actions/generalActions'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -34,6 +36,9 @@ const useStyles = makeStyles((theme) => ({
 export default function RemoveLog(props) {
   const classes = useStyles();
 
+  let dispatch = useDispatch();
+  let mesg = '';
+
   const [Title,setTitle] = useState("");
 
   const onHandleSubmit = async (e) => {
@@ -55,7 +60,14 @@ export default function RemoveLog(props) {
       alert(result.msg)
       // console.log(result.msg);
       setTitle("");
+      mesg = result.msg
     }
+
+    dispatch(delete_log({
+      Username: Username,
+      Title: Title,
+      msg: mesg,
+    }))
   }
 
   return (

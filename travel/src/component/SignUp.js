@@ -15,6 +15,8 @@ import Container from '@material-ui/core/Container';
 import  {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
+import { useDispatch } from 'react-redux';
+import { registered,registered_failed } from './Redux/actions/authActions';
 
 function Copyright() {
   return (
@@ -53,6 +55,11 @@ export default function SignUp() {
   const classes = useStyles();
 
   const navigate = useNavigate();
+  let dispatch = useDispatch();
+
+  let exist = false;
+  let mesg = '';
+
   const [Username,setEmail] = useState('');
   const [Password,setPassword] = useState('');
 
@@ -64,7 +71,7 @@ export default function SignUp() {
     e.preventDefault();
 
     let result = await fetch (
-      's/main/signup',{
+      'http://localhost:5000/main/signup',{
         method: "post",
         body: JSON.stringify({Username,Password}),
         headers: {
@@ -78,10 +85,22 @@ export default function SignUp() {
       alert(result.msg)
       setEmail("");
       setPassword("");;
+      exist = result.res
+      mesg = result.msg
     }
 
-    let path = "/main/signin"
-    navigate(path)
+    if(exist === true){
+      const path = "/main/signin"
+      navigate(path)
+      dispatch(registered({
+        msg : mesg,
+      }))
+    }
+    else{
+      dispatch(registered_failed({
+        msg: mesg,
+      }))
+    }
   }
 
   return (

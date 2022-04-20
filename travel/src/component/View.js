@@ -27,7 +27,10 @@ class View extends Component{
         Description: '',
         Date_added: ''
     };
+
+    
     let Username = props.name
+    
     // console.log(JSON.stringify({Username}))
     fetch(
       'http://localhost:5000/main/view/logs',{
@@ -46,14 +49,9 @@ class View extends Component{
             })
         });
 
-    
       // console.log(this.props.name)
     // this.handleChange = this.handleChange.bind(this);
   }
-
-  // handleChange(event) {    
-  //   this.setState({value: event.target.value});  
-  // }   
 
   render() {
     return (

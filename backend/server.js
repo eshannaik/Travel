@@ -170,13 +170,13 @@ app.post('/main/signup',async(req,res) => {
     const pword = req.body.Password;
 
     if(!uname || !pword){
-        return res.status(400).json({msg: ' Please enter all fields'})
+        return res.status(400).json({msg: ' Please enter all fields',res:false})
     }
 
     SL.findOne({Username : uname})
         .then(user => {
             if(user){
-                res.status(400).json({msg:'User already exists'})
+                res.status(400).json({msg:'User already exists',res:false})
             }
             else{
                 if(pword.length > 7){
@@ -194,16 +194,16 @@ app.post('/main/signup',async(req,res) => {
 
                             if(result){
                                 // console.log(result)
-                                res.status(400).json({msg:'User added'});
+                                res.status(400).json({msg:'User added',res:true});
                             }
                             else{
-                                res.status(400).json({msg : err});
+                                res.status(400).json({msg : err,res:false});
                             }
                         })
                     })                    
                 }
                 else{
-                    res.status(400).json({msg:"Password must be atleast 8 characters long"})
+                    res.status(400).json({msg:"Password must be atleast 8 characters long",res:false})
                 }
             }
         })
@@ -214,33 +214,38 @@ app.post('/main/forgot',async(req,res) => {
     const pword = req.body.Password;
 
     if(!uname || !pword){
-        return res.status(400).json({msg: 'Please enter your username'})
+        return res.status(400).json({msg: 'Please enter your username',res:false})
     }
 
     if(pword.length > 7){
         SL.findOne({Username:uname})
             .then(user => {
-                bcrypt.genSalt(10,(err,salt) => {
-                    bcrypt.hash(pword,salt,(err,hash)=>{
-                        if(err)
-                            throw err;
+                if(!user){
+                    res.status(400).json({msg:'User doesn\'t exists',res:false})
+                }
+                else{
+                    bcrypt.genSalt(10,(err,salt) => {
+                        bcrypt.hash(pword,salt,(err,hash)=>{
+                            if(err)
+                                throw err;
 
-                        req.body.Password = hash;
+                            req.body.Password = hash;
 
-                        SL.findByIdAndUpdate({_id : user._id},req.body)
-                            .then(u => {
-                                if(u){
-                                    res.json({msg :"Your password has been updated"})
+                            SL.findByIdAndUpdate({_id : user._id},req.body)
+                                .then(u => {
+                                    if(u){
+                                        res.json({msg :"Your password has been updated",res:true})
+                                    }
                                 }
-                                else{
-                                    res.status(400).json({msg:"Email Address doesn't exist"})
-                                }
-                            }
-                        )
-                    })
-                }) 
+                            )
+                        })
+                    }) 
+                }
             }
         )
+    }
+    else{
+        res.status(400).json({msg:"Password must be atleast 8 characters long",res:false})
     }
 })
 
@@ -253,11 +258,11 @@ app.delete('/main/removeUser',async (req,res) => {
         if(item){
             SL.deleteOne({Username: u})
             .then(i => {
-                res.json({msg :"User remove from the database"});
+                res.json({msg :"User remove from the database",res:true});
             })
         }
         else{
-            res.status(400).json({msg :"No user with this username exists"});
+            res.status(400).json({msg :"No user with this username exists",res:false});
         }
     });
 })
